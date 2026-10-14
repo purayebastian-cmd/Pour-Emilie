@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7f4">
+  <meta name="description" content="Un petit billet doux, plein d’amour, pour EMILIE.">
+  <title>Pour EMILIE ♡</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #fff7f4;
+      --ink: #493b3a;
+      --muted: #9b8581;
+      --rose: #c96f7b;
+      --rose-light: #f8dadd;
+      --sage: #8d9b81;
+      --line: rgba(70, 68, 58, .12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 15%, rgba(255, 196, 207, .62), transparent 34%),
+        radial-gradient(ellipse at 88% 84%, rgba(249, 221, 203, .5), transparent 31%),
+        var(--paper);
+      font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { width: min(100%, 1000px); }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 8px 18px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+    .signature { color: var(--ink); font-family: Georgia, serif; font-size: 17px; letter-spacing: 0; }
+    .signature span { display: inline-block; color: var(--rose); animation: heartbeat 1.5s ease-in-out infinite; }
+    .card {
+      position: relative;
+      min-height: 560px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      padding: clamp(42px, 8vw, 92px);
+      border: 1px solid rgba(255,255,255,.92);
+      border-radius: 25px;
+      background: rgba(255, 253, 252, .88);
+      box-shadow: 0 26px 78px rgba(145, 77, 92, .12), 0 2px 8px rgba(86, 77, 62, .025);
+      isolation: isolate;
+    }
+    .copy { position: relative; z-index: 2; max-width: 410px; }
+    .eyebrow { display: flex; align-items: center; gap: 9px; margin-bottom: 24px; color: #a36b74; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: "♡"; color: var(--rose); font-size: 15px; letter-spacing: 0; }
+    h1 { margin: 0; font-family: "Trebuchet MS", "Avenir Next", sans-serif; font-size: clamp(52px, 7.4vw, 78px); font-weight: 700; letter-spacing: -.07em; line-height: .99; }
+    h1 em { display: block; color: var(--rose); font-style: normal; font-weight: 700; }
+    .love-line { margin: 12px 0 0; color: #b66e79; font-family: Georgia, serif; font-size: 17px; font-style: italic; }
+    .intro { max-width: 350px; margin: 17px 0 25px; color: #82716d; font-size: 15px; line-height: 1.85; }
+    .favorites { margin: 0 0 24px; }
+    .favorites-title { margin: 0 0 10px; color: #a77d76; font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+    .favorites-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-width: 360px; }
+    .favorite { min-height: 48px; display: flex; align-items: center; gap: 9px; padding: 7px 10px; border: 1px solid #f2e5e0; border-radius: 12px; background: rgba(255,250,248,.8); color: #705d58; font-size: 11px; }
+    .favorite svg { flex: 0 0 28px; width: 28px; height: 28px; overflow: visible; }
+    .open-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid #edc2c8;
+      border-radius: 999px;
+      color: #754b53;
+      background: #ffedef;
+      font: inherit;
+      font-size: 12px;
+      letter-spacing: .035em;
+      cursor: pointer;
+      transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+    }
+    .open-note:hover { transform: translateY(-2px); border-color: var(--rose); background: #ffe4e8; box-shadow: 0 7px 20px rgba(160, 75, 96, .14); }
+    .open-note:focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; }
+    .arrow { color: var(--rose); font-size: 17px; transition: transform .25s ease; }
+    .open-note:hover .arrow { transform: translateX(3px); }
+    .celebration { position: absolute; z-index: 4; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+    .particle { position: absolute; font-size: var(--size, 18px); line-height: 1; animation: heart-burst 1.35s cubic-bezier(.16,.65,.3,1) both; animation-delay: var(--delay, 0s); }
+    @keyframes heart-burst {
+      0% { opacity: 0; transform: translate(-50%,-50%) scale(.25) rotate(0); }
+      14% { opacity: 1; }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.8) rotate(var(--spin)); }
+    }
+    .message {
+      max-width: 330px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin: 0;
+      padding: 0 15px;
+      border: 1px solid transparent;
+      border-radius: 15px;
+      color: #755a59;
+      background: #fff6f5;
+      font-size: 15px;
+      line-height: 1.75;
+      box-shadow: 0 5px 18px rgba(139, 80, 89, .07);
+      transition: max-height .55s ease, opacity .4s ease, margin .4s ease, padding .4s ease, border-color .4s ease;
+    }
+    .message.visible { max-height: 300px; margin-top: 18px; padding: 14px 16px; border-color: #f4d9d9; opacity: 1; }
+    .message-kicker { display: block; margin-bottom: 7px; color: var(--rose); font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+    .message-copy { display: block; font-family: Georgia, serif; font-size: 15px; }
+    .message-signature { display: block; margin-top: 9px; color: #b66e79; font-family: Georgia, serif; font-size: 14px; font-style: italic; text-align: right; }
+    .art { position: relative; display: grid; place-items: center; min-height: 365px; }
+    .sun { position: absolute; width: min(32vw, 275px); aspect-ratio: 1; border-radius: 50%; background: #fbe5e3; }
+    .sun::before, .sun::after { content: ""; position: absolute; border: 1px dashed rgba(217,130,136,.42); border-radius: 50%; inset: -13px; }
+    .sun::after { inset: -26px; border-style: solid; border-color: rgba(217,130,136,.18); }
+    .doodle { position: absolute; color: var(--rose); font-family: Georgia, serif; }
+    .sparkle-one { top: 18%; left: 10%; font-size: 23px; }
+    .sparkle-two { top: 26%; right: 8%; color: #e3aa83; font-size: 17px; }
+    .sparkle-three { bottom: 17%; right: 13%; color: #e3aa83; font-size: 21px; }
+    .heart-float { position: absolute; top: 10%; right: 19%; color: #e59096; font-size: 36px; transform: rotate(12deg); animation: float 3.4s ease-in-out infinite; }
+    .cat-photo-frame {
+      position: relative;
+      z-index: 1;
+      width: min(30vw, 280px);
+      max-width: 100%;
+      margin: 0;
+      padding: 9px 9px 27px;
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 15px;
+      background: #fffefa;
+      box-shadow: 0 19px 38px rgba(80,55,49,.17), 0 3px 8px rgba(80,55,49,.08);
+      transform: rotate(-3deg);
+      animation: float 4s ease-in-out infinite;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .cat-photo-frame:hover { transform: rotate(-1deg) translateY(-3px); box-shadow: 0 24px 44px rgba(80,55,49,.19), 0 3px 8px rgba(80,55,49,.08); }
+    .cat-photo { display: block; width: 100%; aspect-ratio: 168 / 187; object-fit: cover; object-position: center; border-radius: 8px; }
+    .photo-caption { margin: 9px 0 0; color: #967a72; font-family: Georgia, serif; font-size: 13px; font-style: italic; text-align: center; }
+    .photo-heart { position: absolute; right: -15px; bottom: 18px; display: grid; width: 45px; aspect-ratio: 1; place-items: center; border: 3px solid #fffefa; border-radius: 50%; color: var(--rose); background: #fff0ed; box-shadow: 0 4px 12px rgba(116,74,70,.12); font-size: 22px; transform: rotate(9deg); animation: heartbeat 1.8s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-9px) rotate(1deg); } }
+    @keyframes happy-bounce { 0%,100% { transform: translateY(0) rotate(0) scale(1); } 35% { transform: translateY(-14px) rotate(-4deg) scale(1.03); } 70% { transform: translateY(1px) rotate(3deg) scale(.99); } }
+    .card.is-open .cat-photo-frame { animation: happy-bounce .65s ease both; }
+    .card.party .cat-photo-frame { animation: happy-bounce .72s ease both; }
+    .card.party .photo-heart { animation: heartbeat .42s ease-in-out 2; }
+    @keyframes heartbeat { 0%,100% { transform: scale(1); } 35% { transform: scale(1.18); } 65% { transform: scale(.94); } }
+    .favorite { transition: box-shadow .25s ease; }
+    .card.party .favorite { animation: favorite-pop .48s ease both; }
+    .card.party .favorite:nth-child(2) { animation-delay: .1s; }
+    .card.party .favorite:nth-child(3) { animation-delay: .2s; }
+    .card.party .favorite:nth-child(4) { animation-delay: .3s; }
+    @keyframes favorite-pop { 50% { transform: translateY(-5px) rotate(-2deg); background: #fff0ed; box-shadow: 0 5px 14px rgba(217,130,136,.18); } }
+    .bottomline { display:flex; justify-content:space-between; margin: 17px 8px 0; color: #a09d92; font-size: 10px; letter-spacing: .1em; }
+    .bottomline span:last-child { color: #9a9c88; }
+    @media (max-width: 680px) {
+      body { padding: 18px; }
+      .topbar { margin: 0 3px 13px; font-size: 9px; }
+      .card { grid-template-columns: 1fr; min-height: auto; gap: 2px; padding: 42px 28px 22px; border-radius: 20px; }
+      .copy { max-width: none; }
+      .eyebrow { margin-bottom: 19px; }
+      h1 { font-size: clamp(58px, 15vw, 78px); }
+      .intro { margin: 19px 0 20px; font-size: 15px; }
+      .favorites { margin-bottom: 21px; }
+      .favorite { font-size: 10px; gap: 6px; padding: 6px 7px; }
+      .art { min-height: 280px; margin-top: 6px; }
+      .sun { width: 210px; }
+      .cat-photo-frame { width: min(80vw, 280px); }
+      .heart-float { top: 7%; right: 20%; }
+      .bottomline { font-size: 8px; letter-spacing: .06em; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="signature">pour <span>♡</span> toi</div>
+      <div>une petite attention</div>
+    </header>
+    <section class="card" aria-labelledby="title">
+      <div class="copy">
+        <div class="eyebrow">un mot pour toi</div>
+        <h1 id="title">Pour <em>EMILIE</em></h1>
+        <p class="love-line">J’espère te faire sourire ♡</p>
+        <p class="intro">Une petite attention faite pour toi, avec quelques-uns de tes petits bonheurs et beaucoup de douceur.</p>
+        <section class="favorites" aria-label="Les petits favoris d’EMILIE">
+          <p class="favorites-title">Ses petits favoris</p>
+          <div class="favorites-grid">
+            <div class="favorite">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <path d="M5 6c1 12 7 17 11 17s10-5 11-17" stroke="#c89a46" stroke-width="2.2" stroke-linecap="round"/>
+                <circle cx="5" cy="6" r="1.7" fill="#e8c779"/><circle cx="27" cy="6" r="1.7" fill="#e8c779"/>
+                <path d="M16 20c-1.6-2-4.8-1.2-4.8 1.1 0 1.8 2.7 3.7 4.8 5.2 2.1-1.5 4.8-3.4 4.8-5.2 0-2.3-3.2-3.1-4.8-1.1Z" fill="#e8c779" stroke="#c89a46" stroke-width="1.2" stroke-linejoin="round"/>
+              </svg>
+              <span>Bijoux en or</span>
+            </div>
+            <div class="favorite">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <path d="M16 16c-3-2-6-5-5-8 1-3 5-2 5 1 0-3 4-4 5-1 1 3-2 6-5 8Z" fill="#fffaf5" stroke="#d98b91" stroke-width="1.5"/>
+                <path d="M16 15c2-4 5-5 7-3 2 2-1 5-7 5m0-2c-2-4-5-5-7-3-2 2 1 5 7 5m0-2c-1 5-1 9 0 13" stroke="#899b7b" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M16 24c-3-3-6-3-8-1 2 3 5 4 8 3m0-2c3-3 6-3 8-1-2 3-5 4-8 3" fill="#c8d2b5" stroke="#899b7b" stroke-width="1.2" stroke-linejoin="round"/>
+              </svg>
+              <span>Des lys</span>
+            </div>
+            <div class="favorite">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <path d="M8 7h16l3 4-4 3-2-2v14H11V12l-2 2-4-3 3-4Z" fill="#f2d9d2" stroke="#c7837d" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M13 8c0 3 1 5 3 5s3-2 3-5" stroke="#fff8f3" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M13 17h6" stroke="#fff8f3" stroke-width="1.3" stroke-linecap="round"/>
+              </svg>
+              <span>Jolis vêtements</span>
+            </div>
+            <div class="favorite">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <circle cx="13" cy="17" r="10" fill="#38312f" stroke="#2d2827" stroke-width="1.5"/>
+                <circle cx="21" cy="13" r="9" fill="#493d39" stroke="#2d2827" stroke-width="1.5"/>
+                <path d="M15 8h.1M24 8h.1M26 14h.1M19 18h.1M9 13h.1M7 20h.1M14 24h.1" stroke="#cbbdb4" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M14 11c1 2 1 3 0 5m6-1c-1 2-1 4 0 6" stroke="#74625a" stroke-width="1" opacity=".8"/>
+              </svg>
+              <span>Oreos</span>
+            </div>
+          </div>
+        </section>
+        <button class="open-note" id="openNote" type="button" aria-expanded="false" aria-controls="message">
+          <span class="button-label">Découvrir mon petit mot</span><span class="arrow" aria-hidden="true">♡</span>
+        </button>
+        <div class="message" id="message" aria-live="polite">
+          <span class="message-kicker">quelques mots sincères</span>
+          <span class="message-copy">Je te trouve vraiment belle et mignonne. Ta gentillesse avec moi me touche beaucoup. Je voulais simplement te le dire, et j’espère que cette petite page te fera sourire. <span aria-hidden="true">♡</span></span>
+          <span class="message-signature">— avec douceur</span>
+        </div>
+      </div>
+      <div class="celebration" id="celebration" aria-hidden="true"></div>
+      <div class="art" aria-hidden="true">
+        <div class="sun"></div>
+        <span class="doodle sparkle-one">✦</span>
+        <span class="doodle sparkle-two">♡</span>
+        <span class="doodle sparkle-three">✧</span>
+        <span class="heart-float">♥</span>
+        <figure class="cat-photo-frame">
+          <img class="cat-photo" src="images/chat-emilie.png" alt="Le chat d’EMILIE, avec son pelage noir, blanc et roux" width="168" height="187">
+          <figcaption class="photo-caption">La star de la maison ♡</figcaption>
+          <span class="photo-heart" aria-hidden="true">♥</span>
+        </figure>
+      </div>
+    </section>
+    <footer class="bottomline"><span>faite avec tout plein de douceur</span><span>un petit miaou pour toi ♡</span></footer>
+  </main>
+  <script>
+    const button = document.querySelector('#openNote');
+    const message = document.querySelector('#message');
+    const card = document.querySelector('.card');
+    const celebration = document.querySelector('#celebration');
+    let burstTimer;
+    button.addEventListener('click', () => {
+      button.setAttribute('aria-expanded', 'true');
+      message.classList.add('visible');
+      card.classList.add('is-open');
+      button.querySelector('.arrow').textContent = '♥';
+      button.querySelector('.button-label').textContent = 'Encore un peu de douceur ?';
+
+      const cardBounds = card.getBoundingClientRect();
+      const buttonBounds = button.getBoundingClientRect();
+      const originX = buttonBounds.left - cardBounds.left + buttonBounds.width / 2;
+      const originY = buttonBounds.top - cardBounds.top + buttonBounds.height / 2;
+      const symbols = ['♡', '♥', '✦', '✧', '❀'];
+      const colors = ['#d98288', '#e7b85f', '#dca08c', '#9aa884'];
+      celebration.replaceChildren();
+      for (let index = 0; index < 26; index += 1) {
+        const particle = document.createElement('span');
+        const angle = (Math.PI * 2 * index) / 26;
+        const distance = 70 + (index % 4) * 34;
+        particle.className = 'particle';
+        particle.textContent = symbols[index % symbols.length];
+        particle.style.left = `${originX}px`;
+        particle.style.top = `${originY}px`;
+        particle.style.color = colors[index % colors.length];
+        particle.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
+        particle.style.setProperty('--dy', `${Math.sin(angle) * distance}px`);
+        particle.style.setProperty('--spin', `${(index % 2 ? 1 : -1) * (35 + index * 4)}deg`);
+        particle.style.setProperty('--size', `${14 + (index % 4) * 4}px`);
+        particle.style.setProperty('--delay', `${(index % 5) * .025}s`);
+        celebration.append(particle);
+      }
+      card.classList.remove('party');
+      void card.offsetWidth;
+      card.classList.add('party');
+      window.clearTimeout(burstTimer);
+      burstTimer = window.setTimeout(() => {
+        celebration.replaceChildren();
+        card.classList.remove('party');
+      }, 1450);
+    });
+  </script>
+</body>
+</html>
